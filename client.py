@@ -21,6 +21,8 @@ pink = (220, 0, 220)
 green = (0, 255, 150)
 blue = (0, 150, 255)
 
+
+'''random start points of p1 and p2'''
 rand = random.randint
 p1 = {'x': rand(1,dwidth),
       'y': rand(1,dheight),
@@ -34,7 +36,7 @@ p2 = {'x': rand(1,dwidth),
       's': 5,
       'l': 40}
 
-
+'''set up network shit n that'''
 host = '127.0.0.1'
 port = random.randint(5001,6000)
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -44,16 +46,16 @@ server = ('127.0.0.1', 5000)
 
 while True:
 
-    try:
-        playerpos = (name, p1)
-        playerpos = str(playerpos).encode()
-        s.sendto(playerpos, server) #send your coords etc
-        data, addr = s.recvfrom(1024)
-        playerpos = eval(data.decode())
-        if playerpos[0] != name:
-            p2 = playerpos[1]
-    except:
-        pass
+    '''NETWORK COMMUNICATIONZ HAPPEN HERE'''
+    playerpos = (name, p1)
+    playerpos = str(playerpos).encode()
+    s.sendto(playerpos, server) #send your coords etc
+    data, addr = s.recvfrom(1024)
+    playerpos = eval(data.decode())
+    if playerpos[0] != name:
+        p2 = playerpos[1]
+
+        
 
     display.fill(black)
 
